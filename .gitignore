@@ -1,0 +1,18 @@
+
+Podfile\.lock
+
+Pods/Alamofire/
+
+Pods/Target Support Files/SwiftyJSON/
+
+Pods/Target Support Files/Pods-GHIndoorPosition/
+
+Pods/Target Support Files/Alamofire/
+
+Pods/SwiftyJSON/
+
+Pods/Pods\.xcodeproj/xcuserdata/pepe\.xcuserdatad/xcschemes/
+
+*.pbxproj
+
+Pods/Manifest\.lock
