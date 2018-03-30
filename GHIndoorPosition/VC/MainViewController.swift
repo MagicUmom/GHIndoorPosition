@@ -12,12 +12,13 @@ import SwiftyJSON
 
 class MainViewController: UIViewController {
     
-    private var GetPostionTimer : Timer = Timer()
+    private var GetPostionTimer:Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.GetPostionTimer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(MainViewController.GetLocationCycle), userInfo: nil, repeats: true)
+//        self.GetPostionTimer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(MainViewController.GetLocationCycle), userInfo: nil, repeats: true)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,8 +34,8 @@ class MainViewController: UIViewController {
             switch(response.result) {
             case .success(_):
                 let SwiftyJsonVar = JSON(response.result.value)
-//                print("JSON: \(SwiftyJsonVar)")
-                if let resData = SwiftyJsonVar["LOC_TAG_INDEX_1"].string{
+                print("JSON: \(SwiftyJsonVar)")
+                if let resData = SwiftyJsonVar["LOC_TAG_INDEX_0"].string{
 //                    print(resData)
                     let resDataArr = resData.components(separatedBy: ",")
                     let location_X = resDataArr[6]
@@ -64,7 +65,7 @@ class MainViewController: UIViewController {
     
     func drawLine(X:CGFloat , Y:CGFloat){
 //        let circlePath = UIBezierPath(arcCenter: CGPoint(x: 100,y: 100), radius: CGFloat(10), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: (X-80)*10 + 40 ,y: (Y-80)*10 + 50 ), radius: CGFloat(3), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: (X*414)/850 ,y: (487*Y)/1000 + 100 ), radius: CGFloat(5), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = circlePath.cgPath
         
@@ -81,10 +82,24 @@ class MainViewController: UIViewController {
         animation.toValue = 0
         animation.duration = 1.0
         animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
         shapeLayer.add(animation, forKey: "MyAnimation")
         
 
     }
 
+    @IBAction func btn_START(_ sender: Any) {
+        if GetPostionTimer == nil{
+            self.GetPostionTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(MainViewController.GetLocationCycle), userInfo: nil, repeats: true)
+        }
+    }
+    @IBAction func btn_STOP(_ sender: Any) {
+        if GetPostionTimer != nil{
+            GetPostionTimer!.invalidate()
+            GetPostionTimer = nil
+        }
+    }
+    @IBAction func btn_CLEAN(_ sender: Any) {
+    }
 }
 
