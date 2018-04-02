@@ -27,9 +27,41 @@ class MainViewController: UIViewController {
     }
 
     // MARK: - GET LOCATION API CYCLE
+    @objc func get_realtime_location(){
+        Alamofire.request(REALTIME_API, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
+            //            print("JSON:\(response.result.value)")
+            switch(response.result) {
+            case .success(_):
+                
+                let SwiftyJsonVar = JSON(response.result.value)
+                print("JSON: \(SwiftyJsonVar)")
+
+                if let tag_num = Int(SwiftyJsonVar["LOC_TAG_NUM"].string!){
+                    for i in 0 ..< tag_num {
+                        var tag_name = "LOC_TAG_INDEX_\(i)"
+                        if let resData = SwiftyJsonVar[tag_name].string{
+                            let resDataArr = resData.components(separatedBy: ",")
+                            let location_X = resDataArr[6]
+                            let location_Y = resDataArr[7]
+                            let location_Z = resDataArr[8]
+                            print("\(location_X)_\(location_Y)_\(location_Z) ")
+                            self.drawLine(X: CGFloat((location_X as NSString).doubleValue),Y: CGFloat((location_Y as NSString).doubleValue))
+                        }
+                    }
+                }
+                
+            case .failure(_):
+                
+                print("Error message:\(response.result.error)")
+                break
+                
+            }
+        }
+    }
+    
     @objc func GetLocationCycle(){
         
-        Alamofire.request("http://mylinkit.local/cgi-bin/vilsnodes.lua?loadtag=1", method: .get, encoding: JSONEncoding.default).responseJSON{ response in
+        Alamofire.request(REALTIME_API, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
 //            print("JSON:\(response.result.value)")
             switch(response.result) {
             case .success(_):
@@ -53,13 +85,6 @@ class MainViewController: UIViewController {
                 
             }
         }
-//        let comm = ServerCommunicator.shareInstance()
-//        comm.send_location(parameter: parameters){(json)in
-//            if json == JSON.null {
-//                print("send location fail")
-//                return
-//            }
-//        }
         
     }
     
@@ -90,7 +115,7 @@ class MainViewController: UIViewController {
 
     @IBAction func btn_START(_ sender: Any) {
         if GetPostionTimer == nil{
-            self.GetPostionTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(MainViewController.GetLocationCycle), userInfo: nil, repeats: true)
+            self.GetPostionTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(MainViewController.get_realtime_location), userInfo: nil, repeats: true)
         }
     }
     @IBAction func btn_STOP(_ sender: Any) {
