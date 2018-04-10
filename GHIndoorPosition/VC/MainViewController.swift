@@ -35,10 +35,11 @@ class MainViewController: UIViewController {
                 
                 let SwiftyJsonVar = JSON(response.result.value)
                 print("JSON: \(SwiftyJsonVar)")
-
+                
+                // tag 的數量
                 if let tag_num = Int(SwiftyJsonVar["LOC_TAG_NUM"].string!){
                     for i in 0 ..< tag_num {
-                        var tag_name = "LOC_TAG_INDEX_\(i)"
+                        let tag_name = "LOC_TAG_INDEX_\(i)"
                         if let resData = SwiftyJsonVar[tag_name].string{
                             let resDataArr = resData.components(separatedBy: ",")
                             let location_X = resDataArr[6]
