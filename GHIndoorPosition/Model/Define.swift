@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 // 後端回傳資料的key值
 
 // MARK: 網址
@@ -38,3 +39,5 @@ let PROFILE_PHOTO_KEY = "profileImage"
 
 // MARK : - TAG API JSON 資訊格式
 
+// MARK : - TAG COLOR SET
+let TAG_COLOR_SET : [(CGColor)] = [ (UIColor.red.cgColor),(UIColor.blue.cgColor),(UIColor.brown.cgColor), (UIColor.gray.cgColor), (UIColor.green.cgColor), (UIColor.orange.cgColor), (UIColor.purple.cgColor)]
