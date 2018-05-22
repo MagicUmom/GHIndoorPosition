@@ -28,6 +28,14 @@ class MainViewController: UIViewController {
 
     // MARK: - GET LOCATION API CYCLE
     @objc func get_realtime_location(){
+        var WEB_API : String = String.init()
+        if (USER_API==""){
+            WEB_API = MCLAB_API
+        }else{
+            WEB_API = USER_API
+        }
+        print(WEB_API)
+        
         Alamofire.request(MCLAB_API, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
             //            print("JSON:\(response.result.value)")
             switch(response.result) {

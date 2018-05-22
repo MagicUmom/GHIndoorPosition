@@ -14,6 +14,7 @@ import UIKit
 let REALTIME_API = "http://140.134.27.222:7878/cgi-bin/vilsnodes.lua"
 let HISTORY_API = "http://140.134.25.56:8080/api/GetPosition"
 let MCLAB_API = "http://140.134.25.59/cgi-bin/vilscgi?action=vilsnodes"
+var USER_API = ""
 
 // MARK: db KEY defined
 let LOGIN_ACCOUNT_KEY = "loginAccount"
