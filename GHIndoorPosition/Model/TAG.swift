@@ -25,6 +25,9 @@
 
 import Foundation
 
+protocol TAG_STRING{
+    
+}
 class TAG{
     
     private var TAG_NAME : String?
