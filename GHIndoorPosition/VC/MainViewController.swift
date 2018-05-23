@@ -13,7 +13,8 @@ import SwiftyJSON
 class MainViewController: UIViewController {
     
     private var GetPostionTimer:Timer?
-
+    var UI_background: UIImageView = UIImageView(frame:CGRect(x:0,y:100,width: screenWidth,height: 475))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -25,7 +26,28 @@ class MainViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.view.insertSubview(UI_background, at: 0)
+        
+        switch BACKGROUN_SELECT {
+        case 0:
+            UI_background.alpha = 0
+            return
+        case 1:
+            UI_background.image = UIImage(named: "flat")
+            UI_background.alpha = 1
+            return
+        case 2:
+            UI_background.image = UIImage(named: "flat2")
+            UI_background.alpha = 1
+            return
 
+        default:
+            return
+        }
+    }
     // MARK: - GET LOCATION API CYCLE
     @objc func get_realtime_location(){
         var WEB_API : String = String.init()
@@ -136,4 +158,6 @@ class MainViewController: UIViewController {
     @IBAction func btn_CLEAN(_ sender: Any) {
     }
 }
+
+
 

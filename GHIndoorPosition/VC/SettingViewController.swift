@@ -14,7 +14,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // set background
         UIGraphicsBeginImageContext(self.view.frame.size)
         UIImage(named: "background")?.draw(in: self.view.bounds)
