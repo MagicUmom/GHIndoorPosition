@@ -16,6 +16,9 @@ let HISTORY_API = "http://140.134.25.56:8080/api/GetPosition"
 let MCLAB_API = "http://140.134.25.59/cgi-bin/vilscgi?action=vilsnodes"
 var USER_API = ""
 
+// MARK: 背景圖片
+var BACKGROUN_SELECT = 2
+
 // MARK: db KEY defined
 let LOGIN_ACCOUNT_KEY = "loginAccount"
 let LOGIN_PASSWORD_KEY = "loginPassword"
@@ -42,3 +45,14 @@ let PROFILE_PHOTO_KEY = "profileImage"
 
 // MARK : - TAG COLOR SET
 let TAG_COLOR_SET : [(CGColor)] = [ (UIColor.red.cgColor),(UIColor.blue.cgColor),(UIColor.brown.cgColor), (UIColor.gray.cgColor), (UIColor.green.cgColor), (UIColor.orange.cgColor), (UIColor.purple.cgColor)]
+
+
+// Screen width.
+public var screenWidth: CGFloat {
+    return UIScreen.main.bounds.width
+}
+
+// Screen height.
+public var screenHeight: CGFloat {
+    return UIScreen.main.bounds.height
+}
