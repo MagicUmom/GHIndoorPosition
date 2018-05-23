@@ -36,7 +36,7 @@ class MainViewController: UIViewController {
         }
         print(WEB_API)
         
-        Alamofire.request(MCLAB_API, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
+        Alamofire.request(WEB_API, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
             //            print("JSON:\(response.result.value)")
             switch(response.result) {
             case .success(_):
