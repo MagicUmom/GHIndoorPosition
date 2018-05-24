@@ -15,10 +15,31 @@ class MainViewController: UIViewController {
     private var GetPostionTimer:Timer?
     var UI_background: UIImageView = UIImageView(frame:CGRect(x:0,y:100,width: screenWidth,height: 475))
     
+    @IBOutlet weak var UI_btn_START: UIButton!
+    @IBOutlet weak var UI_btn_STOP: UIButton!
+    @IBOutlet weak var UI_btn_CLEAN: UIButton!
+    @IBOutlet weak var UI_btn_SETTING: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 //        self.GetPostionTimer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(MainViewController.GetLocationCycle), userInfo: nil, repeats: true)
+        
+        UI_btn_START.layer.cornerRadius = 10
+        UI_btn_START.layer.borderWidth = 1
+        UI_btn_STOP.layer.cornerRadius = 10
+        UI_btn_STOP.layer.borderWidth = 1
+        UI_btn_CLEAN.layer.cornerRadius = 10
+        UI_btn_CLEAN.layer.borderWidth = 1
+        UI_btn_SETTING.layer.cornerRadius = 10
+        UI_btn_SETTING.layer.borderWidth = 1
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.insertSubview(blurEffectView, at: 0)
 
     }
 
@@ -29,7 +50,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        self.view.insertSubview(UI_background, at: 0)
+        self.view.insertSubview(UI_background, at: 1)
         
         switch BACKGROUN_SELECT {
         case 0:
@@ -47,7 +68,11 @@ class MainViewController: UIViewController {
         default:
             return
         }
+
+        
     }
+    
+    
     // MARK: - GET LOCATION API CYCLE
     @objc func get_realtime_location(){
         var WEB_API : String = String.init()
